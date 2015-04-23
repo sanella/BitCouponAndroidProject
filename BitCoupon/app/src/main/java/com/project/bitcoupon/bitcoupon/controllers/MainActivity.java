@@ -74,9 +74,16 @@ public class MainActivity extends BaseActivity {
                 loginUser();
             }
         });
+
+        Button buttonContinueWithoutLogging = (Button) findViewById(R.id.button_continue_without_logging);
+        buttonContinueWithoutLogging.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent continueWithoutLogging = new Intent(MainActivity.this, CouponActivity.class);
+                startActivity(continueWithoutLogging);
+            }
+        });
     }
-
-
 
     private void loginUser(){
         String url = getString(R.string.service_login);

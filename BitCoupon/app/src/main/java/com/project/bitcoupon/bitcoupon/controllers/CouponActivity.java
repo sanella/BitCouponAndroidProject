@@ -103,25 +103,13 @@ public class CouponActivity extends BaseActivity {
 
             }
         });
-
-
-        mCompany = (Button)findViewById(R.id.buttonCompanies);
-        mCompany.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CouponActivity.this, CompanyActivity.class
-                );
-                startActivity(intent);
-            }
-        });
-
     }
 
-    /*@Override
+    @Override
     public void onBackPressed(){
-      //  moveTaskToBack(false);
+       moveTaskToBack(false);
 
-    }*/
+    }
 
     private Callback getCoupon() {
         return new Callback() {

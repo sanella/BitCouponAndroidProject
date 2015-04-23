@@ -107,15 +107,6 @@ public class CompanyActivity extends BaseActivity {
 
             }
         });
-
-        mCoupon = (Button)findViewById(R.id.buttonCoupon);
-        mCoupon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CompanyActivity.this, CouponActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private Callback getCompany() {

@@ -12,6 +12,7 @@
 
     <!-- button -->
     <string name="button_login">Login</string>
+    <string name="continue_without_logging">Continue without logging in</string>
 
     <!-- keys -->
     <string name="key_user_email">bitcamp.benjamin.service.user_email</string>
@@ -55,4 +56,7 @@
     <string name="title_activity_single_coupon">SingleCouponActivity</string>
     <string name="title_activity_user_coupons">UserCouponsActivity</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
+    <string name="action_login">Login</string>
+    <string name="action_companies">Companies</string>
+    <string name="action_coupons">Coupons</string>
 </resources>

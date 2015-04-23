@@ -14,5 +14,17 @@
           android:title="@string/action_logout"
           android:orderInCategory="100"
           app:showAsAction="never"/>
+    <item android:id="@+id/action_login"
+          android:title="@string/action_login"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+    <item android:id="@+id/action_companies"
+          android:title="@string/action_companies"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+    <item android:id="@+id/action_coupons"
+          android:title="@string/action_coupons"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
 
 </menu>

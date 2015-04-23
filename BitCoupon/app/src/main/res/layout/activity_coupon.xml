@@ -1,52 +1,35 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView     xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/scroll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:stackFromBottom="true"
+                android:transcriptMode="alwaysScroll"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
-                android:orientation="vertical"
                 tools:context="com.project.bitcoupon.bitcoupon.controllers.CouponActivity">
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="32dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <Button
-            android:layout_width="127dp"
+        <EditText
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/button_back"
-            android:id="@+id/buttonBack"
-            android:layout_gravity="right"
-            android:background="#FE980F"
-            android:textColor="#ffffff"/>
+            android:hint="@string/hint_filter"
+            android:id="@+id/edit_text_filter"/>
 
-        <Button
-            android:layout_width="135dp"
-            android:layout_height="wrap_content"
-            android:text="@string/button_companies"
-            android:id="@+id/buttonCompanies"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:background="#FE980F"
-            android:textColor="#ffffff" />
-    </RelativeLayout>
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/list_view_coupons"
+            >
 
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_filter"
-        android:id="@+id/edit_text_filter"/>
-
-    <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/list_view_coupons"
-        >
-
-    </ListView>
+        </ListView>
 
 </LinearLayout>
+</ScrollView>

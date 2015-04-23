@@ -101,12 +101,31 @@ public class BaseActivity extends ActionBarActivity {
     public static void createMenuItems(Activity activity, Menu menu){
         // Inflate the menu; this adds items to the action bar if it is present.
         activity.getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem login = menu.findItem(R.id.action_login);
         MenuItem logout = menu.findItem(R.id.action_logout);
         MenuItem profile = menu.findItem(R.id.action_profile);
+        MenuItem coupons = menu.findItem(R.id.action_coupons);
+        MenuItem comapnies = menu.findItem(R.id.action_companies);
+
         if(!checkIfLogged(activity)) {
             logout.setVisible(false);
             profile.setVisible(false);
         }
+
+        if(checkIfLogged(activity)){
+            login.setVisible(false);
+        }
+
+        if(activity.getClass() == CouponActivity.class){
+            comapnies.setVisible(true);
+            coupons.setVisible(false);
+        }
+
+        if(activity.getClass() == CompanyActivity.class){
+            comapnies.setVisible(false);
+            coupons.setVisible(true);
+        }
+
     }
 
     @Override
@@ -139,6 +158,7 @@ public class BaseActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -147,6 +167,12 @@ public class BaseActivity extends ActionBarActivity {
 
         if (id == R.id.action_logout) {
             logout(this);
+            return true;
+        }
+
+        if (id == R.id.action_login) {
+           Intent goLogin = new Intent(this,MainActivity.class);
+            startActivity(goLogin);
             return true;
         }
 
@@ -169,6 +195,20 @@ public class BaseActivity extends ActionBarActivity {
             }
             return true;
         }
+
+        if (id == R.id.action_coupons) {
+            Intent coupons = new Intent(this,CouponActivity.class);
+            startActivity(coupons);
+            return true;
+        }
+
+        if (id == R.id.action_companies) {
+            Intent companies = new Intent(this,CompanyActivity.class);
+            startActivity(companies);
+            return true;
+        }
+
+
         return super.onOptionsItemSelected(item);
     }
 

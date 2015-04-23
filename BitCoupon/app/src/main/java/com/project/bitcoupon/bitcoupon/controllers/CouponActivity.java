@@ -40,7 +40,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CouponActivity extends ActionBarActivity {
+public class CouponActivity extends BaseActivity {
 
     public static final String MyPREFERENCES = "MyPrefs" ;
     private static final String TAG = "CouponActivity_Tag";
@@ -84,7 +84,6 @@ public class CouponActivity extends ActionBarActivity {
                 ServiceRequest.post(url, json, getCoupon());
             }
         });
-
         mCouponList.setAdapter(mAdapter);
 
 
@@ -164,13 +163,6 @@ public class CouponActivity extends ActionBarActivity {
                 });
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
 
     private Callback getProfile() {
@@ -309,48 +301,6 @@ public class CouponActivity extends ActionBarActivity {
     }
 
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-
-            return true;
-        }
-        if (id == R.id.action_logout) {
-            MainActivity.logout(this);
-            return true;
-        }
-
-        if (id == R.id.action_profile) {
-
-            String email = UserData.getInstance().getEmail().toString();
-            //if(email != "" ){
-
-            String url = getString(R.string.service_user_profile);
-            JSONObject profile= new JSONObject();
-            try {
-                profile.put("email", email);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            String json = profile.toString();
-            Log.d(TAG, json);
-            ServiceRequest.post(url, json,  getProfile());
-
-           /*} else {
-                Intent intent = new Intent(CouponActivity.this, TestActivity.class);
-                startActivity(intent);
-            }*/
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
 
 }

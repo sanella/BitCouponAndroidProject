@@ -31,7 +31,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends BaseActivity {
 
     private SharedPreferences mSharedPreferences;
     public static final String TAG = "MainActivity_TAG";
@@ -76,22 +76,7 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
-    public static boolean checkIfLogged(Context ctx){
-        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        String email = sharedPreferences.getString(
-                ctx.getString(R.string.key_user_email),
-                null
-        );
 
-        String password = sharedPreferences.getString(
-                ctx.getString(R.string.key_user_password),
-                null
-        );
-
-        if(email==null || password == null )
-            return false;
-        return true;
-    }
 
     private void loginUser(){
         String url = getString(R.string.service_login);
@@ -173,118 +158,6 @@ public class MainActivity extends ActionBarActivity {
         UserData userData = UserData.getInstance();
         userData.setEmail(email);
         userData.setPassword(password);
+
     }
-
-    public static void createMenuItems(Activity activity, Menu menu){
-        // Inflate the menu; this adds items to the action bar if it is present.
-        activity.getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem logout = menu.findItem(R.id.action_logout);
-        MenuItem profile = menu.findItem(R.id.action_profile);
-        if(!checkIfLogged(activity)) {
-            logout.setVisible(false);
-            profile.setVisible(false);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        createMenuItems(this, menu);
-        return true;
-    }
-
-
-    private Callback getProfile() {
-        return new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-                makeToast(R.string.toast_try_again);
-            }
-
-            @Override
-            public void onResponse(Response response) throws IOException {
-                String responseJson = response.body().string();
-
-                try {
-
-                    JSONObject profile = new JSONObject(responseJson);
-                    Log.d(TAG, "profil");
-                    Intent goToProfile = new Intent(MainActivity.this, UserProfileActivity.class);
-                    goToProfile.putExtra("id", profile.getString("id"));
-                    goToProfile.putExtra("name", profile.getString("name"));
-                    goToProfile.putExtra("surname", profile.getString("surname"));
-                    goToProfile.putExtra("email",profile.getString("email"));
-                    goToProfile.putExtra("address", profile.getString("address"));
-                    goToProfile.putExtra("city",profile.getString("city"));
-                    String pic = profile.getString("picture");
-                    Log.d(TAG, pic);
-                    goToProfile.putExtra("picture", profile.getString("picture"));
-
-
-                    startActivity(goToProfile);
-
-                } catch (JSONException e) {
-                    makeToast(R.string.toast_try_again);
-                    e.printStackTrace();
-                }
-            }
-        };
-    }
-
-    /**
-     * Static method for loggining out.
-     * @param ctx
-     */
-    public static void logout(Context ctx){
-        SharedPreferences sharedpreferences = ctx.getSharedPreferences
-                (SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.clear();
-        editor.commit();
-        UserData.getInstance().setEmail(null);
-        UserData.getInstance().setPassword(null);
-        Intent it = new Intent(ctx, MainActivity.class);
-        ctx.startActivity(it);
-        Log.d("LOGIN", "IN ON ITEM SELECT.");
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        if (id == R.id.action_logout) {
-            logout(this);
-            return true;
-        }
-
-        if (id == R.id.action_profile) {
-
-            String email = UserData.getInstance().getEmail().toString();
-
-            if(email != null ){
-
-                String url = getString(R.string.service_user_profile);
-                JSONObject profile= new JSONObject();
-                try {
-                    profile.put("email", email);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                String json = profile.toString();
-                Log.d(TAG, json);
-                ServiceRequest.post(url, json,  getProfile());
-
-            }
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 }

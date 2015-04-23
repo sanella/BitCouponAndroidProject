@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">BitCoupon</string>
+
+    <!--Code-->
+    <string name="currency">KM</string>
+
+
+    <!-- hints -->
+    <string name="hint_email">Your email</string>
+    <string name="hint_password">Your password</string>
+    <string name="hint_filter">Search</string>
+
+    <!-- button -->
+    <string name="button_login">Login</string>
+
+    <!-- keys -->
+    <string name="key_user_email">bitcamp.benjamin.service.user_email</string>
+    <string name="key_user_password">bitcamp.benjamin.service.user_password</string>
+
+    <!-- Toast -->
+    <string name="toast_try_again">Something went wrong! Try again</string>
+
+    <string name="title_activity_posts">PostsActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Menu -->
+    <string name="action_logout">Logout</string>
+    <string name="action_profile">Profile</string>
+    <string name="User_Id">User ID: </string>
+    <string name="Usernema">Name: </string>
+    <string name="user_surname">Surname: </string>
+    <string name="user_email">Email: </string>
+    <string name="user_adress">Address: </string>
+    <string name="user_city">City: </string>
+    <string name="button_user_coupons">My coupons</string>
+
+
+    <string name="name_of_company">Name of Company: </string>
+    <string name="company_email">Email: </string>
+    <string name="company_address">Address: </string>
+    <string name="company_city">City: </string>
+    <string name="company_contact">Contact: </string>
+
+    <string name="button_back">Back</string>
+    <string name="button_companies">Companies</string>
+    <string name="button_coupon">Coupons</string>
+
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_company">CompanyActivity</string>
+    <string name="title_activity_coupon">CouponActivity</string>
+    <string name="title_activity_single_bought_coupon">SingleBoughtCoupon</string>
+    <string name="title_activity_single_company">SingleCompanyActivity</string>
+    <string name="title_activity_single_coupon">SingleCouponActivity</string>
+    <string name="title_activity_user_coupons">UserCouponsActivity</string>
+    <string name="title_activity_user_profile">UserProfileActivity</string>
+</resources>

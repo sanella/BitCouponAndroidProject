@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="service_login">http://10.0.82.38:9000/api/login</string>
+    <string name="service_posts">http://10.0.82.38:9000/api/coupons</string>
+    <string name="service_single_coupon">http://10.0.82.38:9000/api/coupon</string>
+    <string name="image_path">http://10.0.82.38:9000/assets/</string>
+    <string name="service_user_profile">http://10.0.82.38:9000/api/userProfile</string>
+    <string name="service_user_coupons">http://10.0.82.38:9000/api/boughtCoupons</string>
+    <string name="service_single_user_coupon">http://10.0.82.38:9000/api/boughtCouponDetails</string>
+    <string name="service_companies">http://10.0.82.38:9000/api/companies</string>
+    <string name="service_single_company">http://10.0.82.38:9000/api/companyProfile</string>
+
+</resources>

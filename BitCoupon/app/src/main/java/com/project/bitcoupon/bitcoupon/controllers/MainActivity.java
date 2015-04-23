@@ -1,6 +1,7 @@
 package com.project.bitcoupon.bitcoupon.controllers;
 
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
@@ -33,14 +34,15 @@ import java.io.IOException;
 public class MainActivity extends ActionBarActivity {
 
     private SharedPreferences mSharedPreferences;
-    private static final String TAG = "MainActivity_TAG";
+    public static final String TAG = "MainActivity_TAG";
+    public static final String SHARED_PREFERENCES = "ba.bitcoupon.shared_preferences";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        mSharedPreferences = this.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
         String email = mSharedPreferences.getString(
                 getString(R.string.key_user_email),
                 null
@@ -53,6 +55,7 @@ public class MainActivity extends ActionBarActivity {
 
         if(email != null && password != null){
             setUserData(email, password);
+            Log.d("LOGIN", "email> " + email + " password> " + password);
             loginUser();
         }
 
@@ -71,6 +74,23 @@ public class MainActivity extends ActionBarActivity {
                 loginUser();
             }
         });
+    }
+
+    public static boolean checkIfLogged(Context ctx){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        String email = sharedPreferences.getString(
+                ctx.getString(R.string.key_user_email),
+                null
+        );
+
+        String password = sharedPreferences.getString(
+                ctx.getString(R.string.key_user_password),
+                null
+        );
+
+        if(email==null || password == null )
+            return false;
+        return true;
     }
 
     private void loginUser(){
@@ -155,15 +175,21 @@ public class MainActivity extends ActionBarActivity {
         userData.setPassword(password);
     }
 
+    public static void createMenuItems(Activity activity, Menu menu){
+        // Inflate the menu; this adds items to the action bar if it is present.
+        activity.getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem logout = menu.findItem(R.id.action_logout);
+        MenuItem profile = menu.findItem(R.id.action_profile);
+        if(!checkIfLogged(activity)) {
+            logout.setVisible(false);
+            profile.setVisible(false);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-
-
-
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-
+        createMenuItems(this, menu);
         return true;
     }
 
@@ -205,6 +231,23 @@ public class MainActivity extends ActionBarActivity {
         };
     }
 
+    /**
+     * Static method for loggining out.
+     * @param ctx
+     */
+    public static void logout(Context ctx){
+        SharedPreferences sharedpreferences = ctx.getSharedPreferences
+                (SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.clear();
+        editor.commit();
+        UserData.getInstance().setEmail(null);
+        UserData.getInstance().setPassword(null);
+        Intent it = new Intent(ctx, MainActivity.class);
+        ctx.startActivity(it);
+        Log.d("LOGIN", "IN ON ITEM SELECT.");
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -213,20 +256,11 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-
             return true;
         }
+
         if (id == R.id.action_logout) {
-
-
-            SharedPreferences sharedpreferences = getSharedPreferences
-                    (CouponActivity.MyPREFERENCES, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.clear();
-            editor.commit();
-            moveTaskToBack(true);
-            MainActivity.this.finish();
-
+            logout(this);
             return true;
         }
 

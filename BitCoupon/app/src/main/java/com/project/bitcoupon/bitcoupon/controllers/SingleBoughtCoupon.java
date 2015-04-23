@@ -84,7 +84,7 @@ public class SingleBoughtCoupon extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_single_coupon, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -99,18 +99,11 @@ public class SingleBoughtCoupon extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         if (id == R.id.action_logout) {
-
-            SharedPreferences sharedpreferences = getSharedPreferences
-                    (CouponActivity.MyPREFERENCES, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.clear();
-            editor.commit();
-            moveTaskToBack(true);
-            SingleBoughtCoupon.this.finish();
-
+            MainActivity.logout(this);
+            return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

@@ -163,7 +163,7 @@ public class CompanyActivity extends ActionBarActivity {private ListView mCompan
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_coupon, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -181,15 +181,7 @@ public class CompanyActivity extends ActionBarActivity {private ListView mCompan
         }
 
         if (id == R.id.action_logout) {
-            //TODO
-            SharedPreferences sharedpreferences = getSharedPreferences
-                    (CompanyActivity.MyPREFERENCES, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.clear();
-            editor.commit();
-            moveTaskToBack(true);
-            CompanyActivity.this.finish();
-
+            MainActivity.logout(this);
             return true;
         }
 
@@ -254,36 +246,6 @@ public class CompanyActivity extends ActionBarActivity {private ListView mCompan
         };
     }
 
-   /* private  class CompanyAdapter extends ArrayAdapter<Company>{
-        public CompanyAdapter(ArrayList<Company> companies){
-            super(CompanyActivity.this, 0,  companies );
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup viewGroup) {
-
-            Company current = getItem(position);
-            if (convertView == null) {
-                convertView = CompanyActivity.this.getLayoutInflater()
-                        .inflate(R.layout.row, null);
-            }
-
-            TextView companyName = (TextView) convertView.findViewById(R.id.textview_name);
-            companyName.setText(current.getmName());
-
-            TextView companyEmail = (TextView) convertView.findViewById(R.id.textview_price);
-            companyEmail.setText(current.getmEmail());
-
-
-            ImageView companyImage = (ImageView) convertView.findViewById(R.id.imageview_image);
-            String img =getString(R.string.image_path) + current.getmLogo();
-            img = img.replaceAll("\\\\","/");
-            Log.d(TAG, "Image:" + img);
-            Picasso.with(getContext()).load(img).into(companyImage);
-            return convertView;
-
-        }
-    }*/
 
 
     private  class CompanyAdapter extends ArrayAdapter<Company> {

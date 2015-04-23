@@ -168,7 +168,7 @@ public class CouponActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_coupon, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -323,24 +323,7 @@ public class CouponActivity extends ActionBarActivity {
             return true;
         }
         if (id == R.id.action_logout) {
-
-            UserData.getInstance().setPassword("");
-            UserData.getInstance().setEmail("");
-
-
-            SharedPreferences sharedpreferences = getSharedPreferences
-                    (CouponActivity.MyPREFERENCES, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.remove("email");
-            editor.remove("password");
-            //editor.clear();
-            editor.commit();
-
-            //moveTaskToBack(true);
-            //CouponActivity.this.finish();
-
-            Intent i = new Intent(CouponActivity.this, MainActivity.class);
-            startActivity(i);
+            MainActivity.logout(this);
             return true;
         }
 
